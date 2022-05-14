@@ -34,7 +34,7 @@ class LarynxFrontend:
     
     def say(self, input_text):
         input_text = urllib.parse.quote(input_text)
-        url = f'http://localhost:5002/api/tts?text={input_text}&voice=en-us/ljspeech-glow_tts&vocoder=hifi_gan/universal_large&lengtshScale=1'
+        url = f'http://localhost:5002/api/tts?text={input_text}&voice=en-us/ljspeech-glow_tts&vocoder=hifi_gan/universal_large&lengtshScale=0.7'
         wget.download(url, 'tts.wav')
         self.play_sound('tts.wav')
         os.remove('tts.wav')
