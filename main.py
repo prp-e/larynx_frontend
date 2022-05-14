@@ -41,5 +41,5 @@ class LarynxFrontend:
 
 if __name__ == '__main__':
     l = LarynxFrontend()
-    l.say("Hello, World. I am now a frontend software for Larynx server.")
+    l.say("Longer sentences may take longer time.")
     
