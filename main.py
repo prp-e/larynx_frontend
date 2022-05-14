@@ -2,16 +2,16 @@ from datetime import datetime
 import os
 import pyaudio 
 import requests
-import speech_recognition as sr
 import time 
 import wave
+import wget
 
-class Luna:
+class LarynxFrontend:
     def __init__(self):
         pass 
 
     def play_sound(self, wave_file):
-        wave_file = wave.open(wave_file, 'rb')
+        #wave_file = wave.open(wave_file, 'rb')
         chunk = 1024
         player = pyaudio.PyAudio() 
 
@@ -30,3 +30,8 @@ class Luna:
         
         stream.close()
         player.terminate()
+
+if __name__ == '__main__':
+    input_text = "Hello, world"
+    wget.download('http://localhost:5002/api/tts?text=Hello&voice=en-us/ljspeech-glow_tts&vocoder=hifi_gan/universal_large&lengtshScale=1', 'tts.wav')
+    
