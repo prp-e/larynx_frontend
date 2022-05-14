@@ -36,13 +36,16 @@ class LarynxFrontend:
         input_text = urllib.parse.quote(input_text)
         url = f'{url}/api/tts?text={input_text}&voice=en-us/ljspeech-glow_tts&vocoder=hifi_gan/universal_large&lengtshScale=0.7'
         wget.download(url, file_name)
-        self.play_sound('tts.wav')
         if keep_file:
             pass
         else:
+            self.play_sound('tts.wav')
             os.remove('tts.wav')
 
 if __name__ == '__main__':
     l = LarynxFrontend()
-    l.say("Longer sentences may take longer time.")
+    # Just for hearing
+    l.say("Spider-Man is a great superhero. He has been created by Stan Lee and Steve Ditko at Marvel comics.")
+    # In case you need a file
+    l.say("Spider-Man is a great superhero. He has been created by Stan Lee and Steve Ditko at Marvel comics.", file_name='tts_test.wav', keep_file=True)
     
