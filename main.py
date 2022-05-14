@@ -2,7 +2,8 @@ from datetime import datetime
 import os
 import pyaudio 
 import requests
-import time 
+import time
+import urllib.parse
 import wave
 import wget
 
@@ -11,7 +12,7 @@ class LarynxFrontend:
         pass 
 
     def play_sound(self, wave_file):
-        #wave_file = wave.open(wave_file, 'rb')
+        wave_file = wave.open(wave_file, 'rb')
         chunk = 1024
         player = pyaudio.PyAudio() 
 
@@ -32,6 +33,8 @@ class LarynxFrontend:
         player.terminate()
 
 if __name__ == '__main__':
-    input_text = "Hello, world"
-    wget.download('http://localhost:5002/api/tts?text=Hello&voice=en-us/ljspeech-glow_tts&vocoder=hifi_gan/universal_large&lengtshScale=1', 'tts.wav')
+    input_text = "Hello, World"
+    input_text = urllib.parse.quote(input_text)
+    url = f'http://localhost:5002/api/tts?text={input_text}&voice=en-us/ljspeech-glow_tts&vocoder=hifi_gan/universal_large&lengtshScale=1'
+    wget.download(url, 'tts.wav')
     
