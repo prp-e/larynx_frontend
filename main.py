@@ -32,12 +32,15 @@ class LarynxFrontend:
         stream.close()
         player.terminate()
     
-    def say(self, input_text):
+    def say(self, input_text, url='http://localhost:5002', file_name='tts.wav', keep_file=False):
         input_text = urllib.parse.quote(input_text)
-        url = f'http://localhost:5002/api/tts?text={input_text}&voice=en-us/ljspeech-glow_tts&vocoder=hifi_gan/universal_large&lengtshScale=0.7'
-        wget.download(url, 'tts.wav')
+        url = f'{url}/api/tts?text={input_text}&voice=en-us/ljspeech-glow_tts&vocoder=hifi_gan/universal_large&lengtshScale=0.7'
+        wget.download(url, filename)
         self.play_sound('tts.wav')
-        os.remove('tts.wav')
+        if keep_file:
+            pass
+        else:
+            os.remove('tts.wav')
 
 if __name__ == '__main__':
     l = LarynxFrontend()
